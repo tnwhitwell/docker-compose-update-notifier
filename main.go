@@ -9,12 +9,12 @@ import (
 )
 
 type ComposeFile struct {
-	Version  string `yaml:"version"`
-	Services map[string]Service
+	Version  string             `yaml:"version"`
+	Services map[string]Service `yaml:"services"`
 }
 
 type Service struct {
-	Image string
+	Image string `yaml:"image"`
 }
 
 func (c *ComposeFile) getConfig(filePath *string) (*ComposeFile, error) {
