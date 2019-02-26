@@ -1,0 +1,7 @@
+---
+version: '3'
+services:
+  exporter_upgradable:
+    image: 'tnwhitwell/nest_exporter:86c011e989934868cb81e8c76f70f446f9e6011f'
+  exporter_latest:
+    image: 'tnwhitwell/nest_exporter:189e60a6467a645b9845920097bf1e554bb8131d'
