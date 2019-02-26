@@ -76,7 +76,7 @@ func (s *Service) getLatest() (latestTag string, err error) {
 		return "", err
 	}
 
-	return response.Versions[0].Tags[0].Tag, nil
+	return response.LatestVersion, nil
 }
 
 func main() {
@@ -91,7 +91,7 @@ func main() {
 
 	composeFile.parse(filePath)
 
-	for _, service := range composeFile.Services {
+	for serviceName, service := range composeFile.Services {
 		latestTag, err := service.getLatest()
 		if err != nil {
 			log.Fatalf("error getting latest tag: %v", err)
@@ -100,10 +100,12 @@ func main() {
 		if err != nil {
 			log.Fatalf("error getting current tag: %v", err)
 		}
+		imageName, err := service.Image.name()
+		if err != nil {
+			log.Fatalf("error getting image name: %v", err)
+		}
 		if latestTag != currentTag {
-			fmt.Println(latestTag)
-		} else {
-			fmt.Println(currentTag)
+			fmt.Printf("%s:\n  image: %s:%s\n", serviceName, imageName, latestTag)
 		}
 	}
 

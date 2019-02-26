@@ -69,7 +69,7 @@ type MicroBadgerResponse struct {
 }
 
 func GetImage(path string) (MicroBadgerResponse, error) {
-	resp, err := http.Get(fmt.Sprintf("https://api.microbadger.com/%s", path))
+	resp, err := http.Get(fmt.Sprintf("https://api.microbadger.com/v1/images/%s", path))
 	if err != nil {
 		return MicroBadgerResponse{}, fmt.Errorf("error getting image details from MicroBadger: %v", err)
 	}
